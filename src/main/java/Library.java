@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Library {
 
@@ -17,8 +18,18 @@ public class Library {
         }
     }
 
+    public Book removeBook(){
+        return this.books.remove(0);
+    }
+
     public int getTotalBooks(){
         return this.books.size();
+    }
+
+    public void loanBook(Borrower borrower){
+        if(getTotalBooks() > 0){
+            borrower.addBook(removeBook());
+        }
     }
 
 }

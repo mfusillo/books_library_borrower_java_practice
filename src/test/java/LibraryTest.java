@@ -9,6 +9,7 @@ public class LibraryTest {
     private Book book1;
     private Book book2;
     private Book book3;
+    private Borrower borrower;
 
     @Before
     public void before(){
@@ -16,6 +17,7 @@ public class LibraryTest {
         book2 = new Book("Fantasy", "The Silmarillion", "J.R.R. Tolkien");
         book3 = new Book("Drama", "Norwegian Wood", "Haruki Murakami");
         library = new Library(2);
+        borrower = new Borrower();
 
     }
 
@@ -31,6 +33,20 @@ public class LibraryTest {
         library.addBook(book2);
         library.addBook(book3);
         assertEquals(2, library.getTotalBooks());
+    }
+
+    @Test
+    public void canLoanBookToBorrower(){
+        library.addBook(book1);
+        library.loanBook(borrower);
+        assertEquals(0, library.getTotalBooks());
+        assertEquals(1, borrower.getTotalBooks());
+    }
+
+    @Test
+    public void cannotLoanIfLibraryHasNoBooks(){
+        library.loanBook(borrower);
+        assertEquals(0, borrower.getTotalBooks());
     }
 
 
